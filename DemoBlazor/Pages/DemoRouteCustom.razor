@@ -1,0 +1,20 @@
+﻿@page "/custom/{monParameter:int?}"
+@inject NavigationManager navigation
+
+<h3>DemoRouteCustom</h3>
+<p>@monParameter</p>
+
+@* Association d'évenement du DOM avec nos fonctions *@
+<p @onmouseover="AugmenterMonParametre" @onmouseleave="AugmenterMonParametre">Modification de notre paramètre au survol de notre texte</p>
+
+<p>URI: @navigation.Uri</p>
+
+@* Navigation par le biais d'une fonction *@
+<button @onclick="NaviguerVersCompteur">Vers mon compteur</button>
+
+<button @onclick=@(() => @navigation.NavigateTo("/"))>Vers la home page</button>
+
+@if (@monParameter > 10)
+{
+	<p>Me voici</p>
+}

@@ -1,0 +1,11 @@
+﻿@page "/binding"
+<h3>ExempleBinding</h3>
+
+@* Binding dans les 2 sens: On a accès à la valeur de Message et on paut la modifier *@
+<input type="text" @bind="Nom" />
+
+<button @onclick="DireBonjour">Dire Bonjour</button>
+
+
+@* Lecture seule de la valeur *@
+<p>@Message</p>

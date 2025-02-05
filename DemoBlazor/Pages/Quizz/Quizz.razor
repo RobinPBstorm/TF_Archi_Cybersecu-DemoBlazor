@@ -1,0 +1,14 @@
+﻿<p>Bonjour @Nom</p>
+
+@if (@IndexQuestion < @Questions.Count && @Questions[@IndexQuestion] is not null)
+{
+	<p>@Questions[@IndexQuestion].Intitule</p>
+	@foreach (string proposition in @Questions[@IndexQuestion].Propositions)
+	{
+		<button @onclick=@(() => EnvoyerMaReponse(@proposition))>@proposition</button>
+	}
+}
+else
+{
+	<p>Merci d'avoir participé à ce quizz.</p>
+}

@@ -1,0 +1,29 @@
+﻿@page "/quizz"
+@using DemoBlazor.Models
+
+<h3>ExoQuizz</h3>
+
+@if (string.IsNullOrWhiteSpace(@NomParticipant))
+{
+	<p> Entrez votre nom: </p>
+	<input type="text" @bind=@NomParticipant />
+}
+else
+{
+	<Quizz Nom=@NomParticipant
+		   EnvoyerReponse="maReponse"
+		   SignalerFinQuizz="FinDuQuizz">
+
+	</Quizz>
+}
+
+@if (@PartieFinie)
+{
+	<ul>
+	@foreach (string reponse in @ReponsesParicipant)
+	{
+		<li>@reponse</li>
+	}
+	</ul>
+}
+
