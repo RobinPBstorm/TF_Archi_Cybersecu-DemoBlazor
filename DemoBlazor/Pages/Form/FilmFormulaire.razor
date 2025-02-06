@@ -1,0 +1,22 @@
+﻿@page "/movie"
+
+<h3>FilmFormulaire</h3>
+
+<EditForm Model="Film" OnValidSubmit="SubmitForm">
+	<DataAnnotationsValidator/>
+	<label for="Titre">Titre</label>
+	<InputText id="Titre"
+		@bind-Value=Film.Titre
+		class="form-control"/>
+	<ValidationMessage For="@(() => Film.Titre)"/>
+
+	<label for="AnneeSortie">Année de sortie</label>
+	<InputNumber id="AnneeSortie"
+			   @bind-Value=Film.AnneeSortie
+			   class="form-control" />
+
+	<button class="btn btn-success">Valider</button>
+	<ValidationSummary/>
+</EditForm>
+
+<p>@Message</p>

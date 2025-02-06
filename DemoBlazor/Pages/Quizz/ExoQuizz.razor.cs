@@ -18,7 +18,6 @@ namespace DemoBlazor.Pages.Quizz
 
         public void FinDuQuizz()
         {
-            Console.WriteLine("ici");
             PartieFinie = true;
         }
 
