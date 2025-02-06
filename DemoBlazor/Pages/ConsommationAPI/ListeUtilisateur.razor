@@ -1,0 +1,31 @@
+﻿@page "/listeUtilisateur"
+
+@using DemoBlazor.Models
+<h3>ListeUtilisateur</h3>
+
+@if (Users == null || Users.Count == 0)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Firstname</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (UserFromAPI user in Users)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Name</td>
+                    <td>@user.Firstname</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

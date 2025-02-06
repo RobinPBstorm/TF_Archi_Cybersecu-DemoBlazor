@@ -1,0 +1,22 @@
+﻿@page "/login"
+
+<h3>Login</h3>
+
+<EditForm Model="Login" OnValidSubmit="Connection">
+	<DataAnnotationsValidator />
+	<label for="Username">Username</label>
+	<InputText id="Username"
+			   @bind-Value=Login.Username
+			   class="form-control" />
+	<ValidationMessage For="@(() => Login.Username)" />
+
+	<label for="Password">mot de passe</label>
+	<InputText id="Password"
+				 type="password"
+				 @bind-Value=Login.Password
+				 class="form-control" />
+	<ValidationMessage For="@(() => Login.Password)" />
+
+	<button class="btn btn-success">Valider</button>
+	<ValidationSummary />
+</EditForm>
