@@ -1,0 +1,50 @@
+﻿@page "/ExoFormulaire"
+
+<h3>FormulaireContact</h3>
+
+@if (!@FormulaireValideEtEnvoye)
+{
+	<EditForm Model="utilisateur" OnValidSubmit="EnvoyerFormulaireValide" OnInvalidSubmit="SignalerFormulaireInvalide">
+		<DataAnnotationsValidator />
+
+		<label for="Nom">Nom</label>
+		<InputText id="Nom"
+				   @bind-Value="utilisateur.Nom"
+				   class="form-control" />
+		<ValidationMessage For="@(() => utilisateur.Nom)" />
+
+		<label for="Email">Email</label>
+		<InputText id="Email"
+				   @bind-Value="utilisateur.Email"
+				   class="form-control" />
+		<ValidationMessage For="@(() => utilisateur.Email)" />
+
+		<label for="Telephone">Telephone</label>
+		<InputText id="Telephone"
+				   @bind-Value="utilisateur.Telephone"
+				   class="form-control" />
+		<ValidationMessage For="@(() => utilisateur.Telephone)" />
+
+		<label for="Message">Message</label>
+		<InputTextArea id="Message"
+					   @bind-Value="utilisateur.Message"
+					   class="form-control" />
+		<ValidationMessage For="@(() => utilisateur.Message)" />
+
+		<label for="CouleurPreferee">CouleurPreferee</label>
+		<InputText type="Color" id="CouleurPreferee"
+				   @bind-Value="utilisateur.CouleurPreferee" />
+		<ValidationMessage For="@(() => utilisateur.CouleurPreferee)" />
+
+		<button class="btn btn-success">Valider</button>
+	</EditForm>
+}
+else
+{
+	<p class="text-success">SUCCESS</p>
+}
+
+@if (MessageErreur)
+{
+	<p class=" text-danger">Veuillez vérifier le formulaire</p>
+}
