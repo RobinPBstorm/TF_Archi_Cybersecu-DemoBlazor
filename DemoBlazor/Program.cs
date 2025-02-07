@@ -1,5 +1,6 @@
 using DemoBlazor;
 using DemoBlazor.Services;
+using DemoBlazor.Services.Interceptors;
 using DemoBlazor.Services.Interfaces;
 using DemoBlazor.Services.MyAuthenticationState;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -16,6 +17,16 @@ builder.Services.AddSingleton<AuthenticationStateProvider, MyAuthStateProvider>(
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddTransient<TokenInterceptor>();
+
+// builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddHttpClient("clientWithToken", sp =>
+{
+	new HttpClient();
+	sp.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+}).AddHttpMessageHandler<TokenInterceptor>();
+builder.Services.AddScoped<HttpClient>(sp => sp.GetRequiredService<IHttpClientFactory>()
+									.CreateClient("clientWithToken"));
+
 
 await builder.Build().RunAsync();

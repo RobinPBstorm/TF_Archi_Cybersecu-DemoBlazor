@@ -67,11 +67,11 @@ namespace DemoBlazor.Services
 
 			request.Content = JsonContent.Create(putBody);
 			
-			string? token = await _Stockage.GetItem<string>("token");
-			if (token is not null)
-			{
-				request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-			}
+			//string? token = await _Stockage.GetItem<string>("token");
+			//if (token is not null)
+			//{
+			//	request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+			//}
 			HttpResponseMessage response = await _Http.SendAsync(request);
 
 			if (!response.IsSuccessStatusCode)
