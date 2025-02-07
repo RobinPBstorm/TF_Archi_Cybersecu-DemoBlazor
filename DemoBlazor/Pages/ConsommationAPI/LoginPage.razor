@@ -2,6 +2,11 @@
 
 <h3>Login</h3>
 
+@if (!string.IsNullOrWhiteSpace(ErreurMessage))
+{
+	<p class="text-danger">@ErreurMessage</p>
+}
+
 <EditForm Model="Login" OnValidSubmit="Connection">
 	<DataAnnotationsValidator />
 	<label for="Username">Username</label>
@@ -18,5 +23,4 @@
 	<ValidationMessage For="@(() => Login.Password)" />
 
 	<button class="btn btn-success">Valider</button>
-	<ValidationSummary />
 </EditForm>

@@ -1,11 +1,12 @@
 ﻿
+using DemoBlazor.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Text.Json;
 
 namespace DemoBlazor.Services
 {
-	public class LocalStorageService : IStockageService
+    public class LocalStorageService : IStockageService
 	{
 		private IJSRuntime _js { get; set; }
 

@@ -1,4 +1,4 @@
-﻿namespace DemoBlazor.Models
+﻿namespace DemoBlazor.Models.ConsommationAPI
 {
     public class Tokens
     {

@@ -1,0 +1,16 @@
+﻿@page "/ExerciceAPI"
+@inject NavigationManager navigation
+
+<h3>UserConsommationAPI</h3>
+
+<div>
+    <button @onclick=@(() => navigation.NavigateTo("register"))>S'enregistrer</button>
+</div>
+
+<div>
+    <button @onclick=@(() => navigation.NavigateTo("login"))>Se connecter</button>
+    <button @onclick=@(() => navigation.NavigateTo("changePassword"))>Changer son mot de passe</button>
+    <button @onclick="Logout">Se déconnecter</button>
+</div>
+
+<ListeUtilisateur></ListeUtilisateur>

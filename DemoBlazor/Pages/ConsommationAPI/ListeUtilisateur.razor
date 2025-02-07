@@ -1,13 +1,11 @@
-﻿@page "/listeUtilisateur"
+﻿@using DemoBlazor.Models.ConsommationAPI
+<h4>ListeUtilisateur</h4>
 
-@using DemoBlazor.Models
-<h3>ListeUtilisateur</h3>
-
-@if (Users == null || Users.Count == 0)
+@if (IsLoading)
 {
     <p><em>Loading...</em></p>
 }
-else
+else if (Users is not null)
 {
     <table class="table">
         <thead>
@@ -28,4 +26,8 @@ else
             }
         </tbody>
     </table>
+}
+else
+{
+    <p class="text-danger">@(string.IsNullOrWhiteSpace(@ErreurMessage) ? "Un probléme est survenu" : @ErreurMessage)</p>
 }

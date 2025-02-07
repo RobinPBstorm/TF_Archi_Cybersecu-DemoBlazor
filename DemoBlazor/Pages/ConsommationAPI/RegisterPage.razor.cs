@@ -7,7 +7,7 @@ using System.Net.Http.Json;
 
 namespace DemoBlazor.Pages.ConsommationAPI
 {
-    public partial class LoginPage : ComponentBase
+    public partial class RegisterPage : ComponentBase
     {
         [Inject]
         private NavigationManager Navigation { get; set; }
@@ -15,17 +15,17 @@ namespace DemoBlazor.Pages.ConsommationAPI
         [Inject]
         private IAuthService _authService { get; set; }
 
-        public LoginModel Login { get; set; } = new LoginModel();
+        public UserRegisterForm RegisterModel { get; set; } = new UserRegisterForm();
 
         public string ErreurMessage { get; set; } = string.Empty;
 
-        public async Task Connection()
+        public async Task Register()
         {
             try
             {
-                await _authService.Login(Login.Username, Login.Password);
+                await _authService.Register(RegisterModel);
 
-                Navigation.NavigateTo("/ExerciceAPI");
+                Navigation.NavigateTo("/Login");
 			}
             catch(Exception exception)
             {

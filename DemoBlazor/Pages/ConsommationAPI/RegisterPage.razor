@@ -1,0 +1,39 @@
+﻿@page "/register"
+
+<h3>Enregistrer un nouvel utilisateur</h3>
+
+@if (!string.IsNullOrWhiteSpace(ErreurMessage))
+{
+	<p class="text-danger">@ErreurMessage</p>
+}
+
+<EditForm Model="RegisterModel" OnValidSubmit="Register">
+	<DataAnnotationsValidator />
+
+	<label for="Username">Username</label>
+	<InputText id="Username"
+			   @bind-Value=RegisterModel.Username
+			   class="form-control" />
+	<ValidationMessage For="@(() => RegisterModel.Username)" />
+
+	<label for="Password">mot de passe</label>
+	<InputText id="Password"
+				 type="password"
+				 @bind-Value=RegisterModel.Password
+				 class="form-control" />
+	<ValidationMessage For="@(() => RegisterModel.Password)" />
+
+	<label for="Name">Name</label>
+	<InputText id="Name"
+			   @bind-Value=RegisterModel.Name
+			   class="form-control" />
+	<ValidationMessage For="@(() => RegisterModel.Name)" />
+
+	<label for="Firstname">Firstname</label>
+	<InputText id="Firstname"
+			   @bind-Value=RegisterModel.Firstname
+			   class="form-control" />
+	<ValidationMessage For="@(() => RegisterModel.Firstname)" />
+
+	<button class="btn btn-success">Valider</button>
+</EditForm>
