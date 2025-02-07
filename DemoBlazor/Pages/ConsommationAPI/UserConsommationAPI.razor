@@ -4,13 +4,23 @@
 <h3>UserConsommationAPI</h3>
 
 <div>
-    <button @onclick=@(() => navigation.NavigateTo("register"))>S'enregistrer</button>
+<AuthorizeView> 
+    <NotAuthorized> 
+        <button @onclick=@(() => navigation.NavigateTo("register"))>S'enregistrer</button>
+        <button @onclick=@(() => navigation.NavigateTo("login"))>Se connecter</button>
+    </NotAuthorized>
+    <Authorized>
+        <button @onclick="Logout">Se déconnecter</button>
+    </Authorized>
+</AuthorizeView>
 </div>
 
-<div>
-    <button @onclick=@(() => navigation.NavigateTo("login"))>Se connecter</button>
-    <button @onclick=@(() => navigation.NavigateTo("changePassword"))>Changer son mot de passe</button>
-    <button @onclick="Logout">Se déconnecter</button>
-</div>
+<AuthorizeView>
+    <Authorized>
+        <div>
+            <button @onclick=@(() => navigation.NavigateTo("changePassword"))>Changer son mot de passe</button>
+        </div>
+    </Authorized>
+</AuthorizeView>
 
 <ListeUtilisateur></ListeUtilisateur>

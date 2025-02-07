@@ -1,5 +1,8 @@
 ﻿using DemoBlazor.Models.ConsommationAPI;
 using DemoBlazor.Services.Interfaces;
+using DemoBlazor.Services.MyAuthenticationState;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
@@ -7,15 +10,19 @@ namespace DemoBlazor.Services
 {
     public class AuthService : IAuthService
 	{
+		public AuthenticationStateProvider _StateProvider { get; set; }
+
 		private HttpClient _Http { get; set; }
 
 		private IStockageService _Stockage { get; set; }
 
         public AuthService(HttpClient http,
-							IStockageService stockage)
+							IStockageService stockage,
+							AuthenticationStateProvider stateProvider)
 		{
 			_Http = http;
 			_Stockage = stockage;
+			_StateProvider = stateProvider;
 
         }
 
@@ -33,7 +40,8 @@ namespace DemoBlazor.Services
 				await _Stockage.SetItem<string>("token", tokens.JWT);
 				await _Stockage.SetItem<string>("refreshToken", tokens.RefreshToken);
 
-            }
+				((MyAuthStateProvider)_StateProvider).NotifyUserChanged();
+			}
 			else
 			{
 				throw new Exception(await responses.Content.ReadAsStringAsync());
@@ -45,9 +53,12 @@ namespace DemoBlazor.Services
 			await _Stockage.RemoveItem("token");
 			await _Stockage.RemoveItem("refreshToken");
 
-            // Éventuellement contacter l'API sur endpoint logout
-            // Ce logout pourrait par exemple s'assurer que le refreshToken ne soit plus valide.
-        }
+
+			((MyAuthStateProvider)_StateProvider).NotifyUserChanged();
+
+			// Éventuellement contacter l'API sur endpoint logout
+			// Ce logout pourrait par exemple s'assurer que le refreshToken ne soit plus valide.
+		}
 
 		public async Task ChangePassword(string oldOne, string newOne)
 		{

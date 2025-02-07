@@ -1,6 +1,8 @@
 using DemoBlazor;
 using DemoBlazor.Services;
 using DemoBlazor.Services.Interfaces;
+using DemoBlazor.Services.MyAuthenticationState;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -8,7 +10,9 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped<IStockageService, LocalStorageService>();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddTransient<IStockageService, LocalStorageService>();
+builder.Services.AddSingleton<AuthenticationStateProvider, MyAuthStateProvider>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
